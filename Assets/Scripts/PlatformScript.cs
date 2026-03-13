@@ -44,8 +44,6 @@ public class PlatformScript : MonoBehaviour
 
         Vector3 vp = mainCamera.WorldToViewportPoint(transform.position);
 
-        // Si la plataforma sale por la izquierda del viewport (completamente fuera),
-        // la destruimos para liberar memoria.
         if (vp.x < destroyViewportX)
         {
             Destroy(gameObject);

@@ -50,20 +50,18 @@ public class BackgroundPlatformScript : MonoBehaviour
 
         Vector3 vp = mainCamera.WorldToViewportPoint(transform.position);
 
-        // Si sale por la izquierda, reubicar a la derecha (wrap)
         if (vp.x < destroyViewportX)
         {
             Vector3 newVp = vp;
             newVp.x = respawnViewportX;
-            // variar la posición Y ligeramente para evitar repetición exacta
+            
             newVp.y = Mathf.Clamp01(newVp.y + Random.Range(-respawnYVariance, respawnYVariance));
 
             Vector3 newWorld = mainCamera.ViewportToWorldPoint(newVp);
-            newWorld.z = transform.position.z; // conservar Z de la escena
+            newWorld.z = transform.position.z; 
 
             transform.position = newWorld;
 
-            // renovar velocidad para variedad
             speed = Random.Range(minSpeed, maxSpeed);
         }
     }

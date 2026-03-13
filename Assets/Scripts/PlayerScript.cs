@@ -71,7 +71,6 @@ public class PlayerScript : MonoBehaviour
             rb.AddForce(Vector2.right * xInput * movementForce, ForceMode2D.Force);
         }
 
-        // Limitar velocidad horizontal para que AddForce no acelere indefinidamente.
         float clampedX = Mathf.Clamp(rb.linearVelocity.x, -maxHorizontalSpeed, maxHorizontalSpeed);
         rb.linearVelocity = new Vector2(clampedX, rb.linearVelocity.y);
     }
@@ -83,12 +82,11 @@ public class PlayerScript : MonoBehaviour
 
         if (isGrounded)
         {
-            // Opcional: anular caída previa para que el salto sea consistente.
             if (rb.linearVelocity.y < 0f)
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
 
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isGrounded = false; // bloquea doble salto inmediatamente
+            isGrounded = false;
         }
 
         jumpRequested = false;
@@ -155,7 +153,6 @@ public class PlayerScript : MonoBehaviour
         {
             ContactPoint2D contact = collision.GetContact(i);
 
-            // Si la normal apunta claramente hacia arriba, estamos apoyados sobre esa superficie.
             if (contact.normal.y > 0.5f)
             {
                 Rigidbody2D otherRb = collision.rigidbody;
@@ -184,7 +181,6 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    // CompareTag lanza excepción si la tag no está definida; envolvemos en try/catch para evitar el error en runtime.
     private bool SafeCompareTag(Collider2D collider, string tag)
     {
         if (collider == null) return false;
@@ -194,7 +190,6 @@ public class PlayerScript : MonoBehaviour
         }
         catch (UnityException)
         {
-            // La tag no existe en el proyecto; evitar excepción en tiempo de ejecución.
             return false;
         }
     }

@@ -30,7 +30,6 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
-        // Registrar puntos de spawn no nulos
         spawnPoints.Clear();
         if (SpawnPoint1 != null) spawnPoints.Add(SpawnPoint1);
         if (SpawnPoint2 != null) spawnPoints.Add(SpawnPoint2);
@@ -62,7 +61,6 @@ public class GameManagerScript : MonoBehaviour
         if (platforms == null || platforms.Length == 0) return;
         if (spawnPoints.Count == 0) return;
 
-        // Elegir prefab y spawn point aleatoriamente
         GameObject prefab = platforms[UnityEngine.Random.Range(0, platforms.Length)];
         GameObject spawnPoint = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Count)];
 
@@ -80,7 +78,6 @@ public class GameManagerScript : MonoBehaviour
         gui.text = $"Puntos: {score}    Vidas: {lives}";
     }
 
-    // API pública para que otros scripts notifiquen eventos
     public void AddScore(int amount = 1)
     {
         if (!gameActive) return;
@@ -103,7 +100,6 @@ public class GameManagerScript : MonoBehaviour
 
     public void RestartGame()
     {
-        // Reiniciar estado básico; objetos en escena pueden necesitar restauración por separado.
         score = 0;
         lives = Mathf.Max(0, startingLives);
         gameActive = true;

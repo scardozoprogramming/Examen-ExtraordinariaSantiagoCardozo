@@ -25,12 +25,10 @@ public class DeadZoneScript : MonoBehaviour
     {
         if (other == null) return;
         if (!other.CompareTag("Player")) return;
-
-        // Restar una vida en el GameManager
+        
         if (gms != null)
             gms.LoseLife();
 
-        // Ocultar el siguiente icono de vida (el último activo)
         if (lifeIcons != null)
         {
             for (int i = lifeIcons.Length - 1; i >= 0; i--)
@@ -43,7 +41,6 @@ public class DeadZoneScript : MonoBehaviour
             }
         }
 
-        // Reaparecer al jugador en el punto de spawn y reiniciar su velocidad
         if (playerSpawnPoint != null)
         {
             var player = other.gameObject;
